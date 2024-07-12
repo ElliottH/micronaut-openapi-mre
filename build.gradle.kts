@@ -2,6 +2,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.4.0"
     id("io.micronaut.aot") version "4.4.0"
+    id("io.micronaut.openapi") version "4.4.0"
 }
 
 version = "0.1"
@@ -36,6 +37,11 @@ graalvmNative.toolchainDetection = false
 micronaut {
     runtime("netty")
     testRuntime("junit5")
+    openapi {
+        client("example", file("src/main/resources/open-api.yaml")) {
+            useAuth = true
+        }
+    }
     processing {
         incremental(true)
         annotations("com.example.*")
